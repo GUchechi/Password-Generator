@@ -7,13 +7,21 @@ const symbolsEl = document.getElementById('symbols')
 const generateEl = document.getElementById('generate')
 const clipboardEl = document.getElementById('clipboard')
 
-
 const randomFunc = {
     lower: getRandomLower,
     upper: getRandomUpper,
     number: getRandomNumber,
     symbol: getRandomSymbol
 }
+
+clipboardEl.addEventListener('click', () => {
+    const password = resultEl.innerText;
+  if (!password) {
+    return;
+  }
+  navigator.clipboard.writeText(password);
+    alert('Password copied to clipboard!')
+})
 
 generateEl.addEventListener('click', () => {
     const length = +lengthEl.value
@@ -46,17 +54,15 @@ function generatePassword(lower, upper, number, symbol, length) {
     return finalPassword
 }
 
-
-
-function getRandomLower () {
+function getRandomLower() {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
 
-function getRandomUpper () {
+function getRandomUpper() {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
 }
 
-function getRandomNumber () {
+function getRandomNumber() {
     return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
 }
 
